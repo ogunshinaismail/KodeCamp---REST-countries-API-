@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>REST Countries</title>
+</head>
+<body>
+        <!-- Header -->
+    <div class="container sticky-header">
+        <h1>Where in the world?</h1>
+        <button class="toggle-mode"><i class="far fa-moon moon-icon"></i> Dark Mode</button>
+    </div>
+
+        <!-- Sorting -->
+    <div class="container sorting">
+        <div class="form">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search" placeholder="Search for a country...">
+        </div>
+
+        <div class="region-dropdown">
+            <div class="dropdown">
+                <p>Filter by region</p>
+                <button><i class="fas fa-chevron-down"></i></button>
+            </div>
+            <div class="regions showdropdown">
+                <p class="region" data-id="Africa-region">Africa</p>
+                <p class="region" data-id="America-region">America</p>
+                <p class="region" data-id="Asia-region">Asia</p>
+                <p class="region" data-id="Europe-region">Europe</p>
+                <p class="region" data-id="Oceania-region">Oceania</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Countries -->
+    <div class="countries-container">
+        <!-- country card start -->
+        <!-- <div class="country-card">
+            <div class="country-image">
+                <img src="https://flagcdn.com/ax.svg" alt="">
+            </div>
+            <div class="country-info">
+                <h3>Åland Islands</h3>
+                <p><strong>Population:</strong> 10000</p>
+                <p><strong>Region:</strong> Europe</p>
+                <p><strong>Capital:</strong> Abuja</p>
+            </div>
+        </div> -->
+        <!-- country card end -->
+    </div>  
+    
+    <div class="modal-container show-modal">
+        <!-- <button class="back"><i class="fa-solid fa-arrow-left-long"></i>Back</button>
+        <div class="modal">
+            <div class="flag-modal">
+                <img src="https://flagcdn.com/ax.svg" alt="">
+            </div>
+            <div class="info-modal">
+                <h1>Åland Islands</h1>
+
+                <div class="modal-info">
+                    <div class="modal-info-left">
+                        <p><strong>Native Name:</strong> ${data.population}</p>
+                        <p><strong>Population:</strong> ${data.population}</p>
+                        <p><strong>Region:</strong> ${data.region}</p>
+                        <p><strong>Sub Region:</strong> ${data.capital}</p>
+                        <p><strong>Capital:</strong> ${data.capital}</p>
+                    </div>
+                    
+                    <div class="modal-info-left">
+                        <p><strong>Top Level Domain:</strong> ${data.population}</p>
+                        <p><strong>Currencies:</strong> ${data.population}</p>
+                        <p><strong>Languages:</strong> ${data.capital}</p>
+                    </div>
+
+                    <div class="border-countries">
+                        <p><strong>Border Countries:</strong></p>
+                        <ul class="bc-card">${data.borders.map(el => `<li>${el}</li>`).join('')}</ul>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+    </div>
+
+        
+
+
+<script src="script.js"></script>
+<!-- <script src="main.js"></script> -->
+</body>
+</html>
