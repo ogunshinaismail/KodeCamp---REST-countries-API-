@@ -116,36 +116,75 @@ function showDetails(data) {
                                         </div>
                                     </div>`
 
-    const back = document.querySelector(".back")
-    const bcCard = document.querySelector(".bc-card")
-    // const bcCardlist = document.querySelector(".bc-card-list")
-    // console.log(bcCard)
 
+    // console.log(data.borders)
+    const bcCard = document.querySelector(".bc-card")
+    if(data.borders == "undefined") {
+        bcCard.innerHTML = `<li class="bc-card-list"> No Borders </li>`
+        // console.log("I'm working")
+    }
+    const borderlist = bcCard.childNodes
+
+    borderlist.forEach( bl => {
+        bl.addEventListener("click", () => {
+            // get individual country by code
+            const dataCode = bl.getAttribute("data-code");
+            const request = new XMLHttpRequest();
+            // const urldata = `https://restcountries.com/v2/alpha/${dataCode}`;
+            request.open("GET", `https://restcountries.com/v2/alpha/${dataCode}`);
+            request.send();
+            request.addEventListener("load", function() {
+                const dataPar = JSON.parse(this.responseText)
+                // console.log(dataPar);
+                modalContainer.innerHTML = `<button class="back"><i class="fa-solid fa-arrow-left-long"></i>   Back</button>
+                <div class="modal">
+                    <div class="flag-modal">
+                        <img src="${dataPar.flag}" alt="">
+                    </div>
+                    <div class="info-modal">
+                        <h1>${dataPar.name}</h1>
+
+                        <div class="modal-info">
+                            <div class="modal-info-left">
+                                <p><strong>Native Name:</strong> ${dataPar.nativeName}</p>
+                                <p><strong>Population:</strong> ${dataPar.population}</p>
+                                <p><strong>Region:</strong> ${dataPar.region}</p>
+                                <p><strong>Sub Region:</strong> ${dataPar.subregion}</p>
+                                <p><strong>Capital:</strong> ${dataPar.capital}</p>
+                            </div>
+                            
+                            <div class="modal-info-left">
+                                <p><strong>Top Level Domain:</strong> ${dataPar.topLevelDomain.map( tld => tld)}</p>
+                                <p><strong>Currencies:</strong> ${dataPar.currencies.map( currency => currency.name)}</p>
+                                <p><strong>Languages:</strong> ${dataPar.languages.map( language => language.name )}</p>
+                            </div>
+                        </div>
+
+                        <div class="border-countries">
+                            <p><strong>Border Countries:</strong></p>
+                            <ul class="bc-card">${dataPar.borders.map(border => `<li class="bc-card-list" data-code="${border}">${border}</li>`).join('')}</ul>
+                        </div>
+
+                    </div>
+                </div>`
+            })
+
+            
+        })    
+        const back = document.querySelector(".back")
+        back.addEventListener("click", () => {
+            modalContainer.style.display = "none"
+            document.body.classList.remove("modal-bg-bg")
+        })   
+    })
+
+    
+    const back = document.querySelector(".back")
     back.addEventListener("click", () => {
         modalContainer.classList.toggle("show-modal")
         document.body.classList.remove("modal-bg-bg")
     })
-
-    
-    const borderlist = bcCard.childNodes
-    borderlist.forEach( bl => {
-        bl.addEventListener("click", () => {
-            async
-            // get individual country by code
-            let dataCode = bl.getAttribute("data-code");
-            let urldata = `https://restcountries.com/v2/alpha/${dataCode}`;
-            
-                const url = await fetch(urldata)
-                const res = await url.json()
-                res.forEach(element => {
-                    showCountries(element)
-                    // console.log(element.borders)
-                });
-
-        })       
-    })
 }
-
 
 toggleMode.addEventListener("click", ()=> {
     document.body.classList.toggle("dark")
