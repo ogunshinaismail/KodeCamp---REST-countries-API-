@@ -29,8 +29,8 @@ Users should be able to:
 
 ### Links
 
-- Github: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Github: [Solution URL here](https://github.com/ogunshinaismail/KodeCamp---REST-countries-API-)
+- Live Site URL: [Live site URL here](https://ogunshinaismail.github.io/KodeCamp---REST-countries-API-/)
 
 ## My process
 
