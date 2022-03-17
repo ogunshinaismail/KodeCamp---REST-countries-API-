@@ -11,7 +11,7 @@ async function getCountriesData() {
     const res = await url.json()
     res.forEach(element => {
         showCountries(element)
-        // console.log(element)
+        // console.log(element.borders)
     });
 }
 
@@ -82,7 +82,6 @@ searchInput.addEventListener("input", () => {
 const modalContainer = document.querySelector(".modal-container")
 
 function showDetails(data) {
-    console.log(data.borders)
     modalContainer.classList.toggle("show-modal")
     document.body.classList.add("modal-bg-bg")
     modalContainer.innerHTML = `<button class="back"><i class="fa-solid fa-arrow-left-long"></i>   Back</button>
@@ -103,26 +102,50 @@ function showDetails(data) {
                                                 </div>
                                                 
                                                 <div class="modal-info-left">
-                                                    <p><strong>Top Level Domain:</strong> ${data.topLevelDomain.map( el => el)}</p>
-                                                    <p><strong>Currencies:</strong> ${data.currencies.map( el => el.name)}</p>
-                                                    <p><strong>Languages:</strong> ${data.languages.map( el => el.name )}</p>
+                                                    <p><strong>Top Level Domain:</strong> ${data.topLevelDomain.map( tld => tld)}</p>
+                                                    <p><strong>Currencies:</strong> ${data.currencies.map( currency => currency.name)}</p>
+                                                    <p><strong>Languages:</strong> ${data.languages.map( language => language.name )}</p>
                                                 </div>
                                             </div>
 
                                             <div class="border-countries">
                                                 <p><strong>Border Countries:</strong></p>
-                                                <ul class="bc-card">${data.borders.map(el => `<li>${el}</li>`).join('')}</ul>
+                                                <ul class="bc-card">${data.borders.map(border => `<li class="bc-card-list" data-code="${border}">${border}</li>`).join('')}</ul>
                                             </div>
 
                                         </div>
                                     </div>`
 
     const back = document.querySelector(".back")
+    const bcCard = document.querySelector(".bc-card")
+    // const bcCardlist = document.querySelector(".bc-card-list")
+    // console.log(bcCard)
+
     back.addEventListener("click", () => {
         modalContainer.classList.toggle("show-modal")
         document.body.classList.remove("modal-bg-bg")
     })
+
+    
+    const borderlist = bcCard.childNodes
+    borderlist.forEach( bl => {
+        bl.addEventListener("click", () => {
+            async
+            // get individual country by code
+            let dataCode = bl.getAttribute("data-code");
+            let urldata = `https://restcountries.com/v2/alpha/${dataCode}`;
+            
+                const url = await fetch(urldata)
+                const res = await url.json()
+                res.forEach(element => {
+                    showCountries(element)
+                    // console.log(element.borders)
+                });
+
+        })       
+    })
 }
+
 
 toggleMode.addEventListener("click", ()=> {
     document.body.classList.toggle("dark")
@@ -131,3 +154,8 @@ toggleMode.addEventListener("click", ()=> {
     moonIcon.classList.toggle("fas")
 })
 getCountriesData()
+
+
+// if (data.borders == 'undefined') {
+//     bcCard.innerHTML = `<li>No border</li>`
+// }
