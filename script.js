@@ -119,10 +119,12 @@ function showDetails(data) {
 
     // console.log(data.borders)
     const bcCard = document.querySelector(".bc-card")
+    // console.log(data.borders)
     if(data.borders == "undefined") {
-        bcCard.innerHTML = `<li class="bc-card-list"> No Borders </li>`
-        // console.log("I'm working")
+        console.log("found")
+        // bcCard.innerHTML = `<li class="bc-card-list"> No Borders </li>`
     }
+
     const borderlist = bcCard.childNodes
 
     borderlist.forEach( bl => {
@@ -136,7 +138,7 @@ function showDetails(data) {
             request.addEventListener("load", function() {
                 const dataPar = JSON.parse(this.responseText)
                 // console.log(dataPar);
-                modalContainer.innerHTML = `<button class="back"><i class="fa-solid fa-arrow-left-long"></i>   Back</button>
+                modalContainer.innerHTML = `<button class="back backs"><i class="fa-solid fa-arrow-left-long"></i>   Back</button>
                 <div class="modal">
                     <div class="flag-modal">
                         <img src="${dataPar.flag}" alt="">
@@ -167,15 +169,13 @@ function showDetails(data) {
 
                     </div>
                 </div>`
+                const back = document.querySelector(".back")
+                back.addEventListener("click", () => {
+                    modalContainer.classList.toggle("show-modal")
+                    document.body.classList.remove("modal-bg-bg")
+                })
             })
-
-            
         })    
-        const back = document.querySelector(".back")
-        back.addEventListener("click", () => {
-            modalContainer.style.display = "none"
-            document.body.classList.remove("modal-bg-bg")
-        })   
     })
 
     
